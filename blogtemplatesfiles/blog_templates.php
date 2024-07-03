@@ -367,8 +367,10 @@ if ( ! class_exists( 'blog_templates' ) ) {
             $variables = compact( 'source_blog_id', 'blog_id', 'user_id', 'copier_args' );
             if ( class_exists( $classname ) ) {
                 $r = new ReflectionClass( $classname );
-                $copier = $r->newInstanceArgs( $variables );
-                $copier->execute();
+                if ( method_exists( $classname, 'newInstanceArgs' ) ) {                
+                    $copier = $r->newInstanceArgs( $variables );
+                    $copier->execute();
+                }
             }
 
             restore_current_blog(); //Switch back to our current blog
