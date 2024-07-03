@@ -84,6 +84,9 @@ class NBT_Plugin_Settings_Handler {
 		$current_settings = get_site_option( $this->settings_slug );
 		
 		$model = nbt_get_model();
+		if( empty( $current_settings ) ){
+			$current_settings = array();
+		}
 		$current_settings['templates'] = $model->get_templates();
 
 		foreach( $current_settings['templates'] as $key => $template ) {
